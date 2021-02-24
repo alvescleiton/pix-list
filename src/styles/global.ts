@@ -14,6 +14,9 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     font-weight: normal;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
   }
 
   ol, ul {
