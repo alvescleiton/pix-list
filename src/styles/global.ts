@@ -1,15 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-  html {
-    box-sizing: border-box;
-    font-size: 16px;
-  }
-
-  body {
-    overscroll-behavior-y: none;
-  }
-
   *, *:before, *:after {
     box-sizing: inherit;
   }
@@ -18,6 +9,15 @@ export default createGlobalStyle`
     color: inherit;
     opacity: 0.3; /* Firefox */
     font-size: 90%;
+  }
+
+  html {
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  body {
+    overscroll-behavior-y: none;
   }
 
   body, h1, h2, h3, h4, h5, h6, p, ol, ul {
