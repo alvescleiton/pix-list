@@ -10,6 +10,12 @@ export default createGlobalStyle`
     box-sizing: inherit;
   }
 
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: inherit;
+    opacity: 0.3; /* Firefox */
+    font-size: 90%;
+  }
+
   body, h1, h2, h3, h4, h5, h6, p, ol, ul {
     margin: 0;
     padding: 0;
