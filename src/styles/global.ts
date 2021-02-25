@@ -6,6 +6,10 @@ export default createGlobalStyle`
     font-size: 16px;
   }
 
+  body {
+    overscroll-behavior-y: none;
+  }
+
   *, *:before, *:after {
     box-sizing: inherit;
   }
