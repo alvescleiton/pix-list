@@ -1,4 +1,4 @@
-import { Container, Items, Item, Name, Icon } from './styles'
+import { Container, Items, Item, Name, Icon, NameDescription } from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 
@@ -7,7 +7,10 @@ const PixList: React.FC = () => {
     <Container>
       <Items>
         <Item>
-          <Name>Cleiton</Name>
+          <Name>
+            Edson Henrique
+            <NameDescription>(Sobrinho)</NameDescription>
+          </Name>
           <Icon>
             <FontAwesomeIcon icon={faEye} />
           </Icon>

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   padding: 20px;
@@ -15,7 +15,7 @@ export const Item = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding: 20px 15px;
 
   & + li {
     border-top: 1px solid #f3f3f3;
@@ -23,13 +23,24 @@ export const Item = styled.li`
 `;
 
 export const Name = styled.div`
-  font-size: 14px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
   text-transform: uppercase;
   color: #333;
 `;
 
+export const NameDescription = styled.span`
+  color: #AAA;
+  font-size: 12px;
+  margin-left: 10px;
+  text-transform: initial;
+`
+
 export const Icon = styled.div`
   svg {
-    color: #AAA;
+    color: ${props => props.theme.colors.primary_dark};
+    opacity: 0.7;
+    font-size: 12px;
   }
 `;
