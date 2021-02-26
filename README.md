@@ -1,5 +1,3 @@
 # Pix List
 
 Comming soon
-
----
