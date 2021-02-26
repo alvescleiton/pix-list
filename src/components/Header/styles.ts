@@ -20,6 +20,6 @@ export const Title = styled.h1`
   text-transform: uppercase;
   font-weight: 700;
   font-size: 24px;
-  line-height: 40px;
+  line-height: 60px;
   color: rgba(255,255,255, 0.9);
 `
