@@ -24,7 +24,7 @@ export const Container = styled.div`
 export const Input = styled.input`
   flex: 1 1 auto;
   font-size: 18px;
-  line-height: 34px;
+  line-height: 40px;
   border: 0;
   color: ${props => props.theme.colors.primary};
   background: transparent;
