@@ -3,6 +3,7 @@ import { NextPage } from 'next'
 import Header from '@/components/Header'
 import PixList from '@/components/PixList'
 import Search from '@/components/Search'
+import Footer from '@/components/Footer'
 
 const Home: NextPage = () => {
   return (
@@ -12,6 +13,8 @@ const Home: NextPage = () => {
       <Search />
 
       <PixList />
+
+      <Footer />
     </>
   )
 }
