@@ -1,17 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-
-interface PixListInterface {
-  name: string
-  description: string | null
-  pix: PixInterface[]
-}
-
-interface PixInterface {
-  type: number
-  title: string
-  value: string
-  description: string | null
-}
+import { PixListInterface } from "src/shared/types/pix";
 
 const handler = (_: NextApiRequest, res: NextApiResponse) => {
   const infoItems: PixListInterface[] = [
