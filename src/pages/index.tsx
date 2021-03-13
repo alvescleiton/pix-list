@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 
 import Header from '@/components/Header'
-import PixList from '@/components/PixList'
+import PixList from '@/components/Pix/PixList'
 import Search from '@/components/Search'
 import Footer from '@/components/Footer'
 
