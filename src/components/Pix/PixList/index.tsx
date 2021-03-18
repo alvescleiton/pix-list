@@ -1,26 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Container, Items } from './styles'
-import { useEffect, useState } from 'react'
-import { PixListInterface } from 'src/shared/types/pix'
+import { PixItemInterface } from 'src/shared/types/pix'
 import PixItem from '@/components/Pix/PixItem'
+import { usePixList } from 'src/hooks/PixList'
 
 const PixList: React.FC = () => {
-  const [infoItems, setInfoItems] = useState<PixListInterface[]>([])
-
-  useEffect(() => {
-    (async () => {
-      let items = await fetch('/api/pix')
-      const data = await items.json()
-
-      setInfoItems(data)
-    })()
-  }, [])
+  const { pixListCtx } = usePixList()
 
   return (
     <Container>
-      {infoItems && (
+      {pixListCtx && (
         <Items>
-          {infoItems.map((item) => (
+          {pixListCtx.map((item: PixItemInterface) => (
             <PixItem key={`list-${item.name}`} item={item} />
           ))}
         </Items>
