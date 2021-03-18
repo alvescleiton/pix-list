@@ -1,10 +1,10 @@
-export type PixListInterface = {
+export type PixItemInterface = {
   name: string
   description: string | null
-  pix: PixInterface[]
+  pix: PixInfoInterface[]
 }
 
-export type PixInterface = {
+export type PixInfoInterface = {
   type: number
   title: string
   value: string

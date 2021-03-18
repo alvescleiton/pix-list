@@ -2,10 +2,10 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { Icon, Item, Name, NameDescription } from './styles'
-import { PixListInterface } from 'src/shared/types/pix'
+import { PixItemInterface } from 'src/shared/types/pix'
 
 type Props = {
-  item: PixListInterface
+  item: PixItemInterface
 }
 
 const PixItem = ({ item }: Props) => {
