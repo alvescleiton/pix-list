@@ -1,8 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-  *, *:before, *:after {
-    box-sizing: inherit;
+  * {
+    box-sizing: border-box;
   }
 
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
