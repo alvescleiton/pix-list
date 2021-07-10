@@ -10,7 +10,7 @@ const PixForm = () => {
       <form onSubmit={() => false}>
         <FormControl fullWidth margin="normal">
           <InputLabel htmlFor="nome">Nome</InputLabel>
-          <Input id="nome" aria-describedby="nome" />
+          <Input id="nome" aria-describedby="nome" autoComplete="off" />
         </FormControl>
 
         <FormControl fullWidth margin="normal">
@@ -27,12 +27,12 @@ const PixForm = () => {
 
         <FormControl fullWidth margin="normal">
           <InputLabel htmlFor="chave_pix">Chave PIX</InputLabel>
-          <Input id="chave_pix" aria-describedby="chave_pix" />
+          <Input id="chave_pix" aria-describedby="chave_pix" autoComplete="off" />
         </FormControl>
 
         <FormControl fullWidth margin="normal">
           <InputLabel htmlFor="observacao">Observação</InputLabel>
-          <Input id="observacao" aria-describedby="observacao" />
+          <Input id="observacao" aria-describedby="observacao" autoComplete="off" />
         </FormControl>
 
         <FormControl fullWidth margin="normal"></FormControl>
