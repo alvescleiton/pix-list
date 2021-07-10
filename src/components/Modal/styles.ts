@@ -46,7 +46,7 @@ export const Close = styled.div`
   right: 0px;
 
   svg {
-    font-size: 20px;
+    font-size: 22px;
     color: #583158;
   }
 `
