@@ -4,7 +4,7 @@ export const Item = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 15px;
+  padding: 20px 10px;
 
   & + li {
     border-top: 1px solid #f3f3f3;

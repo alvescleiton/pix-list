@@ -42,8 +42,8 @@ export const Container = styled.div<Props>`
 
 export const Close = styled.div`
   position: absolute;
-  top: -30px;
-  right: 0px;
+  top: 5px;
+  right: 8px;
 
   svg {
     font-size: 22px;
