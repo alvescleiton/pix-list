@@ -12,7 +12,7 @@ export const PixListProvider = (props: Props) => {
 
   useEffect(() => {
     (async () => {
-      let items = await fetch('/api/pix')
+      let items = await fetch('/api/pix/list')
       const data = await items.json()
 
       setPixListCtx(data)
