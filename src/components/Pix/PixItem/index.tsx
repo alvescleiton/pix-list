@@ -15,8 +15,6 @@ const PixItem = ({ item }: Props) => {
         <Item key={`item-${item.name}`}>
           <Name>
             {item.name}
-
-            {item.description && <NameDescription>({item.description})</NameDescription>}
           </Name>
           <Icon>
             <FontAwesomeIcon icon={faEye} />
