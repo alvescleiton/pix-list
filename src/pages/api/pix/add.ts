@@ -1,9 +1,16 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { connectToDatabase } from '../../../shared/utils/mongodb'
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
-  const body = req.body
+import { NextApiRequest, NextApiResponse } from "next"
 
-  return res.status(200).json(body)
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { db } = await connectToDatabase()
+  const data = req.body
+
+  db
+    .collection('pix')
+    .insert(data)
+
+  return res.status(200).json(data)
 }
 
 export default handler
