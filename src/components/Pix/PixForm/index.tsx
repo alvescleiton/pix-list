@@ -2,12 +2,19 @@ import React, { useState } from 'react'
 import { FormControl, Input, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
 import { Container, Title } from './styles'
 import { PixItemInterface } from 'src/shared/types/pix';
+import { PixTypesList } from 'src/shared/consts';
+import { usePixList } from 'src/hooks/PixList';
 
-const PixForm = () => {
+interface Props {
+  closeModal?(): void
+}
+
+const PixForm = ({ closeModal }: Props) => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [type, setType] = useState(0)
   const [pixKey, setPixKey] = useState('')
+  const { pixListCtx, setPixListCtx } = usePixList()
 
   function handleSelect(event: any) {
     var target = event.target as HTMLSelectElement
@@ -34,9 +41,25 @@ const PixForm = () => {
         body: JSON.stringify(obj)
     })
 
-    const content = await response.json()
+    await response.json()
 
-    console.log(content)
+    const list: PixItemInterface[] = [
+      ...pixListCtx,
+      obj
+    ]
+
+    setPixListCtx(list)
+
+    closeModal()
+
+    clearFields()
+  }
+
+  function clearFields() {
+    setName('')
+    setDescription('')
+    setType(0)
+    setPixKey('')
   }
 
   return (
@@ -73,10 +96,11 @@ const PixForm = () => {
             value={type > 0 ? type : ''}
             onChange={handleSelect}
           >
-            <MenuItem value={1}>E-mail</MenuItem>
-            <MenuItem value={2}>CPF</MenuItem>
-            <MenuItem value={3}>Telefone</MenuItem>
-            <MenuItem value={4}>Chave Gerada</MenuItem>
+            {Object.keys(PixTypesList).map(key => {
+              const item = PixTypesList[key]
+
+              return <MenuItem key={item.id} value={item.id}>{item.title}</MenuItem>
+            })}
           </Select>
         </FormControl>
 

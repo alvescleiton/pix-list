@@ -16,7 +16,9 @@ const Footer = () => {
         isOpen={isModalOpen}
         onClose={setIsModalOpen}
       >
-        <PixForm />
+        <PixForm
+          closeModal={() => setIsModalOpen(false)}
+        />
       </Modal>
     </>
   )

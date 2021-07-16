@@ -11,13 +11,15 @@ const PixList: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { pixListCtx } = usePixList()
 
+  if (!pixListCtx) return
+
   return (
     <>
       <Container>
         {pixListCtx && (
           <Items>
             {pixListCtx.map((item: PixItemInterface) => (
-              <PixItem key={`list-${item.name}`} item={item} />
+              <PixItem key={item._id} item={item} />
             ))}
           </Items>
         )}
@@ -27,7 +29,9 @@ const PixList: React.FC = () => {
         isOpen={isModalOpen}
         onClose={setIsModalOpen}
       >
-        <PixForm />
+        <PixForm
+          closeModal={() => setIsModalOpen(false)}
+        />
       </Modal>
     </>
   )
