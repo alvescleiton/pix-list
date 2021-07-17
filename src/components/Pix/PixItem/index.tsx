@@ -13,11 +13,11 @@ const PixItem = ({ item, handleShowItem }: Props) => {
   return (
     <>
       {item && (
-        <Item key={`item-${item.name}`} onClick={() => handleShowItem(item)}>
+        <Item key={`item-${item.name}`}>
           <Name>
             {item.name}
           </Name>
-          <Icon>
+          <Icon onClick={() => handleShowItem(item)}>
             <FontAwesomeIcon icon={faEye} />
           </Icon>
         </Item>
