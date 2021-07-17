@@ -1,13 +1,27 @@
 // 20210220020609
 // https://raw.githubusercontent.com/alvescleiton/react-with-nextjs-default-project/master/tsconfig.json
-
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "es6",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["src/components/*"]
+      "@/components/*": [
+        "src/components/*"
+      ],
+      "@/context/*": [
+        "src/context/*"
+      ],
+      "@/hooks/*": [
+        "src/hooks/*"
+      ],
+      "@/shared/*": [
+        "src/shared/*"
+      ]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -21,6 +35,12 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
