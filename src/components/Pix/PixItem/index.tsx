@@ -1,18 +1,19 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
-import { Icon, Item, Name, NameDescription } from './styles'
+import { Icon, Item, Name } from './styles'
 import { PixItemInterface } from 'src/shared/types/pix'
 
 type Props = {
   item: PixItemInterface
+  handleShowItem?(item: PixItemInterface): void
 }
 
-const PixItem = ({ item }: Props) => {
+const PixItem = ({ item, handleShowItem }: Props) => {
   return (
     <>
       {item && (
-        <Item key={`item-${item.name}`}>
+        <Item key={`item-${item.name}`} onClick={() => handleShowItem(item)}>
           <Name>
             {item.name}
           </Name>

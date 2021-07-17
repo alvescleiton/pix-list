@@ -4,17 +4,26 @@ import { Container, Title } from './styles'
 import { PixItemInterface } from 'src/shared/types/pix';
 import { PixTypesList } from 'src/shared/consts';
 import { usePixList } from 'src/hooks/PixList';
+import { useEffect } from 'react';
 
 interface Props {
+  pixItem?: PixItemInterface
   closeModal?(): void
 }
 
-const PixForm = ({ closeModal }: Props) => {
+const PixForm = ({ closeModal, pixItem }: Props) => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [type, setType] = useState(0)
   const [pixKey, setPixKey] = useState('')
   const { pixListCtx, setPixListCtx } = usePixList()
+
+  useEffect(() => {
+    setName(pixItem?.name)
+    setDescription(pixItem?.description)
+    setType(pixItem?.type || 0)
+    setPixKey(pixItem?.pixKey)
+  }, [pixItem])
 
   function handleSelect(event: any) {
     var target = event.target as HTMLSelectElement

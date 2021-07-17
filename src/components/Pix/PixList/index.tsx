@@ -8,8 +8,14 @@ import PixForm from '../PixForm'
 import Modal from '@/components/Modal'
 
 const PixList: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { pixListCtx } = usePixList()
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [pixItem, setPixItem] = useState<PixItemInterface |  null>(null)
+
+  function handleShowItem(item: PixItemInterface) {
+    setPixItem(item)
+    setIsModalOpen(true)
+  }
 
   if (!pixListCtx) return
 
@@ -19,7 +25,11 @@ const PixList: React.FC = () => {
         {pixListCtx && (
           <Items>
             {pixListCtx.map((item: PixItemInterface) => (
-              <PixItem key={item._id} item={item} />
+              <PixItem
+                key={item._id}
+                item={item}
+                handleShowItem={handleShowItem}
+              />
             ))}
           </Items>
         )}
@@ -31,6 +41,7 @@ const PixList: React.FC = () => {
       >
         <PixForm
           closeModal={() => setIsModalOpen(false)}
+          pixItem={pixItem}
         />
       </Modal>
     </>
