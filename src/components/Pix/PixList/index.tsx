@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { Container, Items } from './styles'
 import { PixItemInterface } from 'src/shared/types/pix'
 import PixItem from '@/components/Pix/PixItem'
-import { usePixList } from 'src/hooks/PixList'
+import { usePixList } from '@/hooks/PixList'
 
-import PixForm from '../PixForm'
+import PixForm from '@/components/Pix/PixForm'
 import Modal from '@/components/Modal'
 
 const PixList: React.FC = () => {

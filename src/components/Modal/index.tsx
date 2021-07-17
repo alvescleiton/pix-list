@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Background, Close, Container } from './styles'
 
-import ReactDOM from 'react-dom'
-
 interface Props {
   children: React.ReactNode
   isOpen: boolean

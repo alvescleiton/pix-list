@@ -1,10 +1,10 @@
 import React from "react"
-import Modal from "../Modal"
-import PixForm from "../Pix/PixForm";
+import Modal from "@/components/Modal"
+import PixForm from "@/components/Pix/PixForm"
 import { Container, ButtonPlus } from "./styles"
 
 const Footer = () => {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
 
   return (
     <>

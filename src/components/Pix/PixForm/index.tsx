@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { FormControl, Input, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
+import { FormControl, Input, InputLabel, Select, MenuItem, Button } from '@material-ui/core'
 import { Container, Title } from './styles'
-import { PixItemInterface } from 'src/shared/types/pix';
-import { PixTypesList } from 'src/shared/consts';
-import { usePixList } from 'src/hooks/PixList';
+import { PixItemInterface } from '@/shared/types/pix'
+import { PixTypesList } from '@/shared/consts'
+import { usePixList } from '@/hooks/PixList'
 import { useEffect } from 'react';
-
 import InputMask from 'react-input-mask'
 
 interface Props {
