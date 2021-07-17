@@ -61,11 +61,11 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
         body: JSON.stringify(obj)
     })
 
-    await response.json()
+    const data = await response.json()
 
     const list: PixItemInterface[] = [
       ...pixListCtx,
-      obj
+      data
     ]
 
     setPixListCtx(list)
@@ -129,14 +129,18 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
           <InputMask
             mask={mask}
             maskChar={null}
-            id="chave_pix"
-            aria-describedby="chave_pix"
             autoComplete="off"
             value={pixKey}
             onChange={(e) => setPixKey(e.target.value)}
-            disabled={type==0}
           >
-            {() => <Input disabled={type==0} />}
+            {(inputProps: any) => (
+              <Input
+                {...inputProps}
+                id="chave_pix"
+                aria-describedby="chave_pix"
+                value={pixKey}
+              />
+            )}
           </InputMask>
         </FormControl>
 
