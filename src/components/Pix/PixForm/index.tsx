@@ -6,6 +6,8 @@ import { PixTypesList } from 'src/shared/consts';
 import { usePixList } from 'src/hooks/PixList';
 import { useEffect } from 'react';
 
+import InputMask from 'react-input-mask'
+
 interface Props {
   pixItem?: PixItemInterface
   closeModal?(): void
@@ -16,6 +18,7 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
   const [description, setDescription] = useState('')
   const [type, setType] = useState(0)
   const [pixKey, setPixKey] = useState('')
+  const [mask, setMask] = useState('')
   const { pixListCtx, setPixListCtx } = usePixList()
 
   useEffect(() => {
@@ -28,6 +31,14 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
   function handleSelect(event: any) {
     var target = event.target as HTMLSelectElement
     var value: number = parseInt(target.value)
+
+    const masks = {
+      [PixTypesList.CPF.id]: '999.999.999-99',
+      [PixTypesList.TELEFONE.id]: '(99) 99999-9999',
+      'default': ''
+    }
+
+    setMask(masks[value] || masks['default'])
 
     setType(value)
   }
@@ -115,14 +126,18 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
 
         <FormControl fullWidth margin="normal">
           <InputLabel htmlFor="chave_pix">Chave PIX</InputLabel>
-          <Input
+          <InputMask
+            mask={mask}
+            maskChar={null}
             id="chave_pix"
             aria-describedby="chave_pix"
             autoComplete="off"
             value={pixKey}
             onChange={(e) => setPixKey(e.target.value)}
             disabled={type==0}
-          />
+          >
+            {() => <Input disabled={type==0} />}
+          </InputMask>
         </FormControl>
 
         <FormControl fullWidth margin="normal"></FormControl>
