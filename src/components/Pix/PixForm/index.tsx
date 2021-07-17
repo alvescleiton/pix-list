@@ -121,6 +121,7 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
             autoComplete="off"
             value={pixKey}
             onChange={(e) => setPixKey(e.target.value)}
+            disabled={type==0}
           />
         </FormControl>
 
