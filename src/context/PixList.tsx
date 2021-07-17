@@ -15,7 +15,7 @@ export const PixListProvider = (props: Props) => {
       let items = await fetch('/api/pix/list')
       const data = await items.json()
 
-      setPixListCtx(data)
+      setPixListCtx(data.concat(data))
     })()
   }, [])
 

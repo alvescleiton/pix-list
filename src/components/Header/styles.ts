@@ -2,7 +2,8 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 export const Container = styled.div`
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 50;
   margin-bottom: 30px;
   ${props => props && css`
