@@ -12,19 +12,29 @@ interface Props {
   closeModal?(): void
 }
 
+enum TypeForm {
+  'ADD' = 1,
+  'EDIT' = 2
+}
+
 const PixForm = ({ closeModal, pixItem }: Props) => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [type, setType] = useState(0)
   const [pixKey, setPixKey] = useState('')
   const [mask, setMask] = useState('')
+  const [typeForm, setTypeForm] = useState(TypeForm.ADD)
   const { pixListCtx, setPixListCtx } = usePixList()
 
   useEffect(() => {
-    setName(pixItem?.name)
-    setDescription(pixItem?.description)
-    setType(pixItem?.type || 0)
-    setPixKey(pixItem?.pixKey)
+    if (pixItem) {
+      setName(pixItem.name)
+      setDescription(pixItem.description)
+      setType(pixItem.type || 0)
+      setPixKey(pixItem.pixKey)
+
+      setTypeForm(TypeForm.EDIT)
+    }
   }, [pixItem])
 
   function handleSelect(event: any) {
@@ -43,6 +53,29 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
   }
 
   async function handleButton() {
+    let data = null
+    let list: PixItemInterface[] = [...pixListCtx]
+
+    if (typeForm === TypeForm.ADD) {
+      data = await addPix()
+
+      list.push(data)
+    } else {
+      data = await editPix()
+
+      list = list.filter(e => e._id != data._id)
+
+      list = [...list, data]
+    }
+
+    setPixListCtx(list)
+
+    closeModal()
+
+    clearFields()
+  }
+
+  async function addPix() {
     const obj: PixItemInterface = {
       name,
       description,
@@ -62,16 +95,31 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
 
     const data = await response.json()
 
-    const list: PixItemInterface[] = [
-      ...pixListCtx,
-      data
-    ]
+    return data
+  }
 
-    setPixListCtx(list)
+  async function editPix() {
+    const obj: PixItemInterface = {
+      _id: pixItem._id,
+      name,
+      description,
+      type,
+      pixKey,
+    }
 
-    closeModal()
+    const response = await fetch('/api/pix/edit',
+    {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify(obj)
+    })
 
-    clearFields()
+    const data = await response.json()
+
+    return data
   }
 
   function clearFields() {
@@ -153,7 +201,7 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
             disableElevation
             onClick={handleButton}
           >
-            Gravar
+            {typeForm === TypeForm.ADD ? 'Gravar' : 'Editar'}
           </Button>
         </FormControl>
       </form>
