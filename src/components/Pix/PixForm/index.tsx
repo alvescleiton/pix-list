@@ -134,6 +134,39 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
     setPixKey('')
   }
 
+  async function handleDelete() {
+    if (confirm("Deseja realmente remover este item?")) {
+      await fetch('/api/pix/delete',
+      {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: JSON.stringify(pixItem)
+      })
+
+      let list: PixItemInterface[] = [...pixListCtx]
+
+      list = list.filter(e => e._id != pixItem._id)
+
+      list.sort((a: PixItemInterface, b: PixItemInterface) => {
+        const item_a = a.name.toUpperCase()
+        const item_b = b.name.toUpperCase()
+
+        return (item_a < item_b) ? -1 : (item_a > item_b) ? 1 : 0
+      })
+
+      setPixListCtx(list)
+
+      closeModal()
+
+      clearFields()
+    }
+
+    return true
+  }
+
   return (
     <Container>
       <Title>Cadastro</Title>
@@ -181,7 +214,6 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
           <InputMask
             mask={mask}
             maskChar={null}
-            autoComplete="off"
             value={pixKey}
             onChange={(e) => setPixKey(e.target.value)}
           >
@@ -191,12 +223,11 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
                 id="chave_pix"
                 aria-describedby="chave_pix"
                 value={pixKey}
+                autoComplete="off"
               />
             )}
           </InputMask>
         </FormControl>
-
-        <FormControl fullWidth margin="normal"></FormControl>
 
         <FormControl fullWidth margin="normal">
           <Button
@@ -209,6 +240,23 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
             {typeForm === TypeForm.ADD ? 'Gravar' : 'Editar'}
           </Button>
         </FormControl>
+
+        {pixItem && (
+          <>
+            <FormControl fullWidth margin="normal">
+              <Button
+                variant="contained"
+                color="secondary"
+                size="large"
+                disableElevation
+                onClick={handleDelete}
+              >
+                Excluir
+              </Button>
+            </FormControl>
+          </>
+        )}
+
       </form>
     </Container>
   )
