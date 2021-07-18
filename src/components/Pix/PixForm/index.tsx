@@ -65,7 +65,12 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
 
       list = list.filter(e => e._id != data._id)
 
-      list = [...list, data]
+      list = [...list, data].sort((a: PixItemInterface, b: PixItemInterface) => {
+        const item_a = a.name.toUpperCase()
+        const item_b = b.name.toUpperCase()
+
+        return (item_a < item_b) ? -1 : (item_a > item_b) ? 1 : 0
+      })
     }
 
     setPixListCtx(list)

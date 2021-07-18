@@ -15,7 +15,14 @@ export const PixListProvider = (props: Props) => {
       let items = await fetch('/api/pix/list')
       const data = await items.json()
 
-      setPixListCtx(data)
+      const list = data.sort((a: PixItemInterface, b: PixItemInterface) => {
+        const item_a = a.name.toUpperCase()
+        const item_b = b.name.toUpperCase()
+
+        return (item_a < item_b) ? -1 : (item_a > item_b) ? 1 : 0
+      })
+
+      setPixListCtx(list)
     })()
   }, [])
 
