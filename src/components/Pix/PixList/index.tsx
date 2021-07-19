@@ -3,12 +3,13 @@ import { Container, Items } from './styles'
 import { PixItemInterface } from 'src/shared/types/pix'
 import PixItem from '@/components/Pix/PixItem'
 import { usePixList } from '@/hooks/PixList'
-
+import Loading from '@/components/Loading'
 import PixForm from '@/components/Pix/PixForm'
 import Modal from '@/components/Modal'
+import NoItemsToShow from '@/components/NoItemsToShow'
 
 const PixList: React.FC = () => {
-  const { pixListCtx } = usePixList()
+  const { pixListCtx, loadingPixList } = usePixList()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pixItem, setPixItem] = useState<PixItemInterface |  null>(null)
 
@@ -17,22 +18,34 @@ const PixList: React.FC = () => {
     setIsModalOpen(true)
   }
 
-  if (!pixListCtx) return
-
   return (
     <>
       <Container>
-        {pixListCtx && (
-          <Items>
-            {pixListCtx.map((item: PixItemInterface) => (
-              <PixItem
-                key={item._id}
-                item={item}
-                handleShowItem={handleShowItem}
-              />
-            ))}
-          </Items>
+        {loadingPixList && (
+          <Loading />
         )}
+
+        {!loadingPixList && (
+          <>
+            {pixListCtx.length > 0 && (
+              <Items>
+                {pixListCtx.map((item: PixItemInterface) => (
+                  <PixItem
+                    key={item._id}
+                    item={item}
+                    handleShowItem={handleShowItem}
+                  />
+                ))}
+              </Items>
+            )}
+
+            {!pixListCtx.length && (
+              <NoItemsToShow />
+            )}
+          </>
+        )}
+
+
       </Container>
 
       <Modal
