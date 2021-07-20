@@ -5,7 +5,7 @@ import { PixItemInterface } from '@/shared/types/pix'
 import { PixTypesList } from '@/shared/consts'
 import { usePixList } from '@/hooks/PixList'
 import { useEffect } from 'react';
-import InputMask from 'react-input-mask'
+import MaskedInput from 'react-text-mask'
 
 interface Props {
   pixItem?: PixItemInterface
@@ -22,7 +22,7 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
   const [description, setDescription] = useState('')
   const [type, setType] = useState(0)
   const [pixKey, setPixKey] = useState('')
-  const [mask, setMask] = useState('')
+  const [mask, setMask] = useState<(string | RegExp)[]>([])
   const [typeForm, setTypeForm] = useState(TypeForm.ADD)
   const { pixListCtx, setPixListCtx } = usePixList()
 
@@ -37,19 +37,23 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
     }
   }, [pixItem])
 
+  function setPixMask(value: number) {
+    const masks = {
+      [PixTypesList.CPF.id]: [/\d/, /\d/, /\d/, '.' ,/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/],
+      [PixTypesList.TELEFONE.id]: ['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+      'default': Array.from(Array(150)).map(() => /./)
+    }
+
+    setMask(masks[value] || masks['default'])
+  }
+
   function handleSelect(event: any) {
     var target = event.target as HTMLSelectElement
     var value: number = parseInt(target.value)
 
-    const masks = {
-      [PixTypesList.CPF.id]: '999.999.999-99',
-      [PixTypesList.TELEFONE.id]: '(99) 99999-9999',
-      'default': ''
-    }
-
-    setMask(masks[value] || masks['default'])
-
     setType(value)
+
+    setPixMask(value)
   }
 
   async function handleButton() {
@@ -211,22 +215,21 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
 
         <FormControl fullWidth margin="normal">
           <InputLabel htmlFor="chave_pix">Chave PIX</InputLabel>
-          <InputMask
+          <MaskedInput
+            id="chave_pix"
+            aria-describedby="chave_pix"
             mask={mask}
-            maskChar={null}
+            guide={false}
             value={pixKey}
             onChange={(e) => setPixKey(e.target.value)}
-          >
-            {(inputProps: any) => (
+            autoComplete="off"
+            render={(ref: any, props: any) => (
               <Input
-                {...inputProps}
-                id="chave_pix"
-                aria-describedby="chave_pix"
-                value={pixKey}
-                autoComplete="off"
+                inputRef={ref}
+                {...props}
               />
             )}
-          </InputMask>
+          />
         </FormControl>
 
         <FormControl fullWidth margin="normal">
