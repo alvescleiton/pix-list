@@ -10,7 +10,7 @@ import NoItemsToShow from '@/components/NoItemsToShow'
 
 const PixList: React.FC = () => {
   const { pixListCtx, loadingPixList } = usePixList()
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [pixItem, setPixItem] = useState<PixItemInterface |  null>(null)
 
   function handleShowItem(item: PixItemInterface) {

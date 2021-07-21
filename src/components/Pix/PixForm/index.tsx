@@ -4,7 +4,7 @@ import { Container, Title } from './styles'
 import { PixItemInterface } from '@/shared/types/pix'
 import { PixTypesList } from '@/shared/consts'
 import { usePixList } from '@/hooks/PixList'
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 import MaskedInput from 'react-text-mask'
 
 interface Props {
