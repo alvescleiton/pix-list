@@ -29,4 +29,12 @@ export const Input = styled.input`
   color: ${props => props.theme.colors.primary};
   background: transparent;
   outline: none;
+
+  &[type="search"] {
+    -webkit-appearance: textfield;
+  }
+
+  &[type="search"]::-webkit-search-decoration {
+      -webkit-appearance: none;
+  }
 `
