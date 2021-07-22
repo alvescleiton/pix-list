@@ -10,7 +10,6 @@ export const PixListContext = React.createContext<any>({})
 export const PixListProvider = (props: Props) => {
   const [pixListCtx, setPixListCtx] = useState<PixItemInterface[]>([])
   const [loadingPixList, setLoadingPixList] = useState(true)
-  const [defaultPixListCtx, setDefaultPixListCtx] = useState<PixItemInterface[]>([])
 
   useEffect(() => {
     (async () => {
@@ -27,13 +26,11 @@ export const PixListProvider = (props: Props) => {
       setPixListCtx(list)
 
       setLoadingPixList(false)
-
-      setDefaultPixListCtx(data)
     })()
   }, [])
 
   return (
-    <PixListContext.Provider value={{ defaultPixListCtx, pixListCtx, setPixListCtx, loadingPixList }}>
+    <PixListContext.Provider value={{ pixListCtx, setPixListCtx, loadingPixList }}>
       {props.children}
     </PixListContext.Provider>
   )

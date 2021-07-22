@@ -3,24 +3,15 @@ import { debounce } from "lodash";
 import { Container, Input } from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { usePixList } from '@/hooks/PixList'
-import { PixItemInterface } from '@/shared/types/pix'
+import { useSearch } from '@/hooks/Search';
 
 const Search: React.FC = () => {
-  const { defaultPixListCtx, setPixListCtx, loadingPixList } = usePixList()
   const [ searchInput, setSearchInput ] = useState('')
-  const debounceFn = useCallback(debounce(filterPixList, 1000), [])
+  const { setSearchCtx } = useSearch()
+  const debounceFn = useCallback(debounce(setSearchInfo, 1000), [])
 
-  function filterPixList(pixListCtx: PixItemInterface[], name: string) {
-    let list: PixItemInterface[] = pixListCtx
-
-    list = list
-      .filter((e: PixItemInterface) => e.name
-        .toLowerCase()
-        .includes(name.toLowerCase())
-      )
-
-    setPixListCtx(list)
+  function setSearchInfo(name: string) {
+    setSearchCtx(name)
   }
 
   function handleSearch(event: any) {
@@ -28,7 +19,7 @@ const Search: React.FC = () => {
 
     setSearchInput(value)
 
-    debounceFn(defaultPixListCtx, value)
+    debounceFn(value)
   }
 
   return (
@@ -38,7 +29,6 @@ const Search: React.FC = () => {
         type="search"
         placeholder="buscar"
         onChange={handleSearch}
-        disabled={loadingPixList}
         value={searchInput}
       />
     </Container>

@@ -7,9 +7,11 @@ import Loading from '@/components/Loading'
 import PixForm from '@/components/Pix/PixForm'
 import Modal from '@/components/Modal'
 import NoItemsToShow from '@/components/NoItemsToShow'
+import { useSearch } from '@/hooks/Search'
 
 const PixList: React.FC = () => {
   const { pixListCtx, loadingPixList } = usePixList()
+  const { searchCtx } = useSearch()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [pixItem, setPixItem] = useState<PixItemInterface |  null>(null)
 
@@ -29,13 +31,16 @@ const PixList: React.FC = () => {
           <>
             {pixListCtx.length > 0 && (
               <Items>
-                {pixListCtx.map((item: PixItemInterface) => (
-                  <PixItem
-                    key={item._id}
-                    item={item}
-                    handleShowItem={handleShowItem}
-                  />
-                ))}
+                { pixListCtx
+                  .filter((e: PixItemInterface) => e.name.toLowerCase().includes(searchCtx.toLowerCase()))
+                  .map((item: PixItemInterface) => (
+                    <PixItem
+                      key={item._id}
+                      item={item}
+                      handleShowItem={handleShowItem}
+                    />
+                  ))
+                }
               </Items>
             )}
 
