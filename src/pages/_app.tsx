@@ -8,6 +8,9 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { PixListProvider } from 'src/context/PixList'
 import { SearchProvider } from '@/context/Search'
+import { ToastContainer } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
@@ -21,6 +24,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           <Header />
           <Component {...pageProps} />
           <Footer />
+
+          <ToastContainer
+            position="top-center"
+            autoClose={3000}
+          />
         </PixListProvider>
       </SearchProvider>
       <GlobalStyle />

@@ -7,6 +7,7 @@ import { usePixList } from '@/hooks/PixList'
 import { useEffect } from 'react'
 import MaskedInput from 'react-text-mask'
 import { validateCPF, validateEmail } from '@/shared/utils/validation'
+import { toast } from 'react-toastify'
 
 interface Props {
   pixItem?: PixItemInterface
@@ -146,31 +147,31 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
 
   function validateForm() {
     if (!name || name.length < 3) {
-      alert('Preencha o nome corretamente!')
+      toast('Preencha o nome corretamente!')
       return false
     }
 
     if (!type) {
-      alert('Tipo inválido!')
+      toast('Tipo inválido!')
       return false
     }
 
     if (type === PixTypesList.CPF.id) {
       if (!validateCPF(pixKey)) {
-        alert('CPF inválido!')
+        toast('CPF inválido!')
         return false
       }
     }
 
     if (type === PixTypesList.EMAIL.id) {
       if (!validateEmail(pixKey)) {
-        alert('E-mail inválido!')
+        toast('E-mail inválido!')
         return false
       }
     }
 
     if (!pixKey) {
-      alert('Preencha uma chave!')
+      toast('Preencha uma chave!')
       return false
     }
 
