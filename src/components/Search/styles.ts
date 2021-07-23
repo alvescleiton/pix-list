@@ -16,6 +16,7 @@ export const Container = styled.div`
 
   .fa-search {
     flex: 0 0 auto;
+    height: 16px;
     margin-right: 20px;
     color: ${props => props.theme.colors.primary};
   }

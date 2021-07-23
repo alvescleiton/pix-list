@@ -7,6 +7,7 @@ const rotate = keyframes`
 
 export const Container = styled.div`
   display: flex;
+  height: 16px;
   align-items: center;
   justify-content: center;
   animation-name: ${rotate};
