@@ -6,6 +6,7 @@ import { PixTypesList } from '@/shared/consts'
 import { usePixList } from '@/hooks/PixList'
 import { useEffect } from 'react'
 import MaskedInput from 'react-text-mask'
+import { validateCPF, validateEmail } from '@/shared/utils/validation'
 
 interface Props {
   pixItem?: PixItemInterface
@@ -65,9 +66,13 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
     if (typeForm === TypeForm.ADD) {
       data = await addPix()
 
+      if (!data) return false
+
       list.push(data)
     } else {
       data = await editPix()
+
+      if (!data) return false
 
       list = list.filter(e => e._id != data._id)
 
@@ -94,6 +99,9 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
       pixKey,
     }
 
+    const validate = validateForm()
+    if (!validate) return false
+
     const response = await fetch('/api/pix/add',
     {
         headers: {
@@ -118,6 +126,9 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
       pixKey,
     }
 
+    const validate = validateForm()
+    if (!validate) return false
+
     const response = await fetch('/api/pix/edit',
     {
         headers: {
@@ -131,6 +142,39 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
     const data = await response.json()
 
     return data
+  }
+
+  function validateForm() {
+    if (!name || name.length < 3) {
+      alert('Preencha o nome corretamente!')
+      return false
+    }
+
+    if (!type) {
+      alert('Tipo inválido!')
+      return false
+    }
+
+    if (type === PixTypesList.CPF.id) {
+      if (!validateCPF(pixKey)) {
+        alert('CPF inválido!')
+        return false
+      }
+    }
+
+    if (type === PixTypesList.EMAIL.id) {
+      if (!validateEmail(pixKey)) {
+        alert('E-mail inválido!')
+        return false
+      }
+    }
+
+    if (!pixKey) {
+      alert('Preencha uma chave!')
+      return false
+    }
+
+    return true
   }
 
   function clearFields() {
