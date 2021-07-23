@@ -33,6 +33,8 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
       setType(pixItem.type || 0)
       setPixKey(pixItem.pixKey)
 
+      setPixMask(pixItem.type)
+
       setTypeForm(TypeForm.EDIT)
     }
   }, [pixItem])
@@ -220,12 +222,11 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
             aria-describedby="chave_pix"
             mask={mask}
             guide={false}
-            value={pixKey}
             onChange={(e) => setPixKey(e.target.value)}
-            autoComplete="off"
             render={(ref: any, props: any) => (
               <Input
                 inputRef={ref}
+                value={pixKey}
                 {...props}
               />
             )}
