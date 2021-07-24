@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { Container, Items } from './styles'
 import { PixItemInterface } from 'src/shared/types/pix'
 import PixItem from '@/components/Pix/PixItem'
-import { usePixList } from '@/hooks/PixList'
+import { usePixList } from '@/hooks/usePixList'
 import Loading from '@/components/Loading'
 import PixForm from '@/components/Pix/PixForm'
 import Modal from '@/components/Modal'
 import NoItemsToShow from '@/components/NoItemsToShow'
-import { useSearch } from '@/hooks/Search'
+import { useSearch } from '@/hooks/useSearch'
 
 const PixList: React.FC = () => {
   const { pixListCtx, loadingPixList } = usePixList()

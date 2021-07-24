@@ -3,7 +3,7 @@ import { FormControl, Input, InputLabel, Select, MenuItem, Button } from '@mater
 import { Container, Title } from './styles'
 import { PixItemInterface } from '@/shared/types/pix'
 import { PixTypesList } from '@/shared/consts'
-import { usePixList } from '@/hooks/PixList'
+import { usePixList } from '@/hooks/usePixList'
 import { useEffect } from 'react'
 import MaskedInput from 'react-text-mask'
 import { validateCPF, validateEmail } from '@/shared/utils/validation'
