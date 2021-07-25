@@ -302,19 +302,20 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
 
         {pixItem && (
           <>
-            <FormControl fullWidth margin="normal">
+            <br /><br />
+
+            <FormControl fullWidth margin="dense">
               <Button
                 variant="contained"
-                color="primary"
                 size="large"
                 disableElevation
                 onClick={handleCopyPixCode}
               >
-                Copiar Código PIX
+                Copiar Chave PIX
               </Button>
             </FormControl>
 
-            <FormControl fullWidth margin="normal">
+            <FormControl fullWidth margin="dense">
               <Button
                 variant="contained"
                 color="secondary"
