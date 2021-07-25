@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 interface Props {
   visible: boolean
@@ -26,7 +26,7 @@ export const Background = styled.div<Props>`
 
 export const Container = styled.div<Props>`
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: calc(100% - 40px);
@@ -35,9 +35,14 @@ export const Container = styled.div<Props>`
   border-radius: 8px;
   transition: .2s all ease-out;
 
-  ${props => !props.visible && css`
-    top: 60%;
+  ${props => props.visible && css`
+    animation: ${slideUp} .25s ease-out 1 both;
   `}
+`
+
+const slideUp = keyframes`
+  from { top: 60%; opacity: 0; }
+  to { top: 50%; opacity: 1; }
 `
 
 export const Close = styled.div`

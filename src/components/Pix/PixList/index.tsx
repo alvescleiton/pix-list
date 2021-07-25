@@ -8,6 +8,7 @@ import PixForm from '@/components/Pix/PixForm'
 import Modal from '@/components/Modal'
 import NoItemsToShow from '@/components/NoItemsToShow'
 import { useSearch } from '@/hooks/useSearch'
+import Portal from '@/components/Portal'
 
 const PixList: React.FC = () => {
   const { pixListCtx, loadingPixList } = usePixList()
@@ -49,19 +50,21 @@ const PixList: React.FC = () => {
             )}
           </>
         )}
-
-
       </Container>
 
-      <Modal
-        isOpen={isModalOpen}
-        onClose={setIsModalOpen}
-      >
-        <PixForm
-          closeModal={() => setIsModalOpen(false)}
-          pixItem={pixItem}
-        />
-      </Modal>
+      {isModalOpen && (
+        <Portal selector="#modal-root">
+          <Modal
+            isOpen={isModalOpen}
+            onClose={setIsModalOpen}
+          >
+            <PixForm
+              closeModal={() => setIsModalOpen(false)}
+              pixItem={pixItem}
+            />
+          </Modal>
+        </Portal>
+      )}
     </>
   )
 }

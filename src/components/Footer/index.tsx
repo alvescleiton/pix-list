@@ -1,6 +1,7 @@
 import React from "react"
 import Modal from "@/components/Modal"
 import PixForm from "@/components/Pix/PixForm"
+import Portal from "@/components/Portal"
 import { Container, ButtonPlus } from "./styles"
 
 const Footer = () => {
@@ -12,14 +13,18 @@ const Footer = () => {
         <ButtonPlus onClick={() => setIsModalOpen(true)}>+</ButtonPlus>
       </Container>
 
-      <Modal
-        isOpen={isModalOpen}
-        onClose={setIsModalOpen}
-      >
-        <PixForm
-          closeModal={() => setIsModalOpen(false)}
-        />
-      </Modal>
+      {isModalOpen && (
+        <Portal selector="#modal-root">
+          <Modal
+            isOpen={isModalOpen}
+            onClose={setIsModalOpen}
+          >
+            <PixForm
+              closeModal={() => setIsModalOpen(false)}
+            />
+          </Modal>
+        </Portal>
+      )}
     </>
   )
 }
