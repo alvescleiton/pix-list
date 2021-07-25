@@ -16,5 +16,6 @@ export const Container = styled.div`
 
   svg {
     font-size: 24px;
+    height: 16px;
   }
 `
