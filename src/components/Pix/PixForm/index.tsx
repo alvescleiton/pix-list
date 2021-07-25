@@ -218,6 +218,16 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
     return true
   }
 
+  function handleCopyPixCode() {
+    var input = document.getElementById('chave_pix') as HTMLInputElement
+    input.focus()
+    input.select()
+    document.execCommand('copy')
+    input.blur()
+
+    toast('Código PIX cópiado!')
+  }
+
   return (
     <Container>
       <Title>Cadastro</Title>
@@ -292,6 +302,18 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
 
         {pixItem && (
           <>
+            <FormControl fullWidth margin="normal">
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                disableElevation
+                onClick={handleCopyPixCode}
+              >
+                Copiar Código PIX
+              </Button>
+            </FormControl>
+
             <FormControl fullWidth margin="normal">
               <Button
                 variant="contained"
