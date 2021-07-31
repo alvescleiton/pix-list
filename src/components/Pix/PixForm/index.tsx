@@ -72,6 +72,8 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
       if (!data) return false
 
       list.push(data)
+
+      toast('Dados gravados com sucesso!')
     } else {
       data = await editPix()
 
@@ -92,6 +94,8 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
     closeModal()
 
     clearFields()
+
+    toast('Dados editados com sucesso!')
   }
 
   async function addPix() {
