@@ -8,6 +8,8 @@ import { useEffect } from 'react'
 import MaskedInput from 'react-text-mask'
 import { validateCPF, validateEmail } from '@/shared/utils/validation'
 import { toast } from 'react-toastify'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSave, faPen, faTrash, faCopy } from '@fortawesome/free-solid-svg-icons'
 
 interface Props {
   pixItem?: PixItemInterface
@@ -296,7 +298,19 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
             disableElevation
             onClick={handleButton}
           >
-            {typeForm === TypeForm.ADD ? 'Gravar' : 'Editar'}
+            {
+              typeForm === TypeForm.ADD ? (
+                <>
+                  <FontAwesomeIcon icon={faSave} /> &nbsp;
+                  Gravar
+                </>
+              ) : (
+                <>
+                  <FontAwesomeIcon icon={faPen} /> &nbsp;
+                  Editar
+                </>
+              )
+            }
           </Button>
         </FormControl>
 
@@ -307,23 +321,25 @@ const PixForm = ({ closeModal, pixItem }: Props) => {
             <FormControl fullWidth margin="dense">
               <Button
                 variant="contained"
+                color="secondary"
                 size="large"
                 disableElevation
-                onClick={handleCopyPixCode}
+                onClick={handleDelete}
               >
-                Copiar Chave PIX
+                <FontAwesomeIcon icon={faTrash} /> &nbsp;
+                Excluir
               </Button>
             </FormControl>
 
             <FormControl fullWidth margin="dense">
               <Button
                 variant="contained"
-                color="secondary"
                 size="large"
                 disableElevation
-                onClick={handleDelete}
+                onClick={handleCopyPixCode}
               >
-                Excluir
+                <FontAwesomeIcon icon={faCopy} /> &nbsp;
+                Copiar Chave PIX
               </Button>
             </FormControl>
           </>
