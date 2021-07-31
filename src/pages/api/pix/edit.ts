@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   db
     .collection('pix')
-    .update(
+    .updateOne(
       myquery,
       newvalues
     )
